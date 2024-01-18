@@ -45,7 +45,16 @@ app.post("/api/v1/jobs", (req, res) => {
 });
 
 // PUT - Update a single job
-app.put("/api/v1/jobs/:id", (req, res) => {
+app.patch("/api/v1/jobs/:id", (req, res) => {
+  const id = req.params.id * 1;
+
+  const job = jobs.find((job) => job.id === id);
+  if (!job) {
+    return res
+      .status(404)
+      .json({ status: "Failed", message: "Tour not found" });
+  }
+ 
   res.status(200).json({ status: "success", message: "Updated job" });
 });
 
