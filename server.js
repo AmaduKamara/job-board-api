@@ -11,12 +11,15 @@ const jobs = [];
 
 // GET - All jobs
 app.get("/api/v1/jobs", (req, res) => {
-  res.status(200).json({ status: "success", jobs });
+  res.status(200).json({ status: "success", data: jobs });
 });
 
 // GET - A single job
 app.get("/api/v1/jobs/:id", (req, res) => {
-  res.status(200).json({ status: "success", message: "Get Job" });
+  const id = req.params.id * 1; // multiply the returned id by 1 to convert it to string value
+  const job = jobs.find((job) => job.id === id);
+
+  res.status(200).json({ status: "success", data: job });
 });
 
 // POST - New jobs
