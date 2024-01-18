@@ -17,7 +17,21 @@ app.get("/api/v1/jobs", (req, res) => {
 // GET - A single job
 app.get("/api/v1/jobs/:id", (req, res) => {
   const id = req.params.id * 1; // multiply the returned id by 1 to convert it to string value
+
+  if (id > jobs.length) {
+    return res
+      .status(404)
+      .json({ status: "Failed", message: "Invalid job ID" });
+  }
+
   const job = jobs.find((job) => job.id === id);
+
+  // if (!job) {
+  //   return res.status(404).json({
+  //     status: "Failed",
+  //     message: "Could notn find a bob with the given ID",
+  //   });
+  // }
 
   res.status(200).json({ status: "success", data: job });
 });
