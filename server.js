@@ -2,11 +2,16 @@ const express = require("express");
 
 const app = express();
 
+// Middleware
+app.use(express.json());
+
 const PORT = 4000;
+
+const jobs = [];
 
 // GET - All jobs
 app.get("/api/v1/jobs", (req, res) => {
-  res.status(200).json({ status: "success", message: "Get All Jobs" });
+  res.status(200).json({ status: "success", jobs });
 });
 
 // GET - A single job
@@ -16,7 +21,10 @@ app.get("/api/v1/jobs/:id", (req, res) => {
 
 // POST - New jobs
 app.post("/api/v1/jobs", (req, res) => {
-  res.status(201).json({ message: "New Jobs" });
+  const job = req.body;
+
+  jobs.push(job);
+  res.status(201).json({ message: "Add New Jobs", job });
 });
 
 // PUT - Update a single job
