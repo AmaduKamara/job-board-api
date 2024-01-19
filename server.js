@@ -58,19 +58,23 @@ const deleteJob = (req, res) => {
 };
 
 // GET - All jobs
-app.get("/api/v1/jobs", getAllJobs);
+// app.get("/api/v1/jobs", getAllJobs);
 
-// GET - A single job
-app.get("/api/v1/jobs/:id", getJob);
+// // GET - A single job
+// app.get("/api/v1/jobs/:id", getJob);
 
-// POST - New jobs
-app.post("/api/v1/jobs", createNewJob);
+// // POST - New jobs
+// app.post("/api/v1/jobs", createNewJob);
 
-// PUT - Update a single job
-app.patch("/api/v1/jobs/:id", updateJob);
+// // PUT - Update a single job
+// app.patch("/api/v1/jobs/:id", updateJob);
 
-// DELETE - Delete a single job
-app.delete("/api/v1/jobs/:id", deleteJob);
+// // DELETE - Delete a single job
+// app.delete("/api/v1/jobs/:id", deleteJob);
+
+// SHortening the routes
+app.route("/api/v1/jobs").get(getAllJobs).post(createNewJob);
+app.route("/api/v1/jobs/:id").get(getJob).patch(updateJob).delete(deleteJob);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
