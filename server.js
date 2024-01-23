@@ -9,7 +9,13 @@ const PORT = 4000;
 
 const jobs = [];
 
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 const getAllJobs = (req, res) => {
+  console.log(req.requestTime); 
   res.status(200).json({ status: "success", data: jobs });
 };
 
