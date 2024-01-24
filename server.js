@@ -99,17 +99,20 @@ const deleteUser = (req, res) => {
   });
 };
 
-// SHortening the routes
-app.route("/api/v1/jobs").get(getAllJobs).post(createNewJob);
-app.route("/api/v1/jobs/:id").get(getJob).patch(updateJob).delete(deleteJob);
+// ROUTES
+const tourRouter = express.Router();
+const userRouter = express.Router();
+
+// Jobs routes
+tourRouter.route("/").get(getAllJobs).post(createNewJob);
+tourRouter.route("/:id").get(getJob).patch(updateJob).delete(deleteJob);
 
 // Users Routes
-app.route("/api/v1/users").get(getAllUsers).post(createUser);
-app
-  .route("/api/v1/users/:id")
-  .get(getUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+userRouter.route("/").get(getAllUsers).post(createUser);
+userRouter.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
+
+app.use("/api/v1/jobs", tourRouter);
+app.use("/api/v1/users", userRouter);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
