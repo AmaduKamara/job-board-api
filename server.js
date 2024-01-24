@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 const getAllJobs = (req, res) => {
-  console.log(req.requestTime); 
+  console.log(req.requestTime);
   res.status(200).json({ status: "success", data: jobs });
 };
 
@@ -63,24 +63,53 @@ const deleteJob = (req, res) => {
   res.status(200).json({ status: "success", message: "Deleted job" });
 };
 
-// GET - All jobs
-// app.get("/api/v1/jobs", getAllJobs);
+// User Controller Functions
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: "Success",
+    message: "This route is not created yet",
+  });
+};
 
-// // GET - A single job
-// app.get("/api/v1/jobs/:id", getJob);
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: "Success",
+    message: "This route is not created yet",
+  });
+};
 
-// // POST - New jobs
-// app.post("/api/v1/jobs", createNewJob);
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: "Success",
+    message: "This route is not created yet",
+  });
+};
 
-// // PUT - Update a single job
-// app.patch("/api/v1/jobs/:id", updateJob);
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: "Success",
+    message: "This route is not created yet",
+  });
+};
 
-// // DELETE - Delete a single job
-// app.delete("/api/v1/jobs/:id", deleteJob);
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: "Success",
+    message: "This route is not created yet",
+  });
+};
 
 // SHortening the routes
 app.route("/api/v1/jobs").get(getAllJobs).post(createNewJob);
 app.route("/api/v1/jobs/:id").get(getJob).patch(updateJob).delete(deleteJob);
+
+// Users Routes
+app.route("/api/v1/users").get(getAllUsers).post(createUser);
+app
+  .route("/api/v1/users/:id")
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
